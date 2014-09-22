@@ -126,12 +126,9 @@ if( regexec( &solid_test, line, 2, solid_matches, 0 ) ) // Ensure that the file 
 }
 solidname = malloc(solid_matches[1].rm_eo - solid_matches[1].rm_so);
 strncpy(solidname, &line[solid_matches[1].rm_so], solid_matches[1].rm_eo - solid_matches[1].rm_so);
-printf("Solid Name is %s\n",solidname);
 solidname[solid_matches[1].rm_eo - solid_matches[1].rm_so]= '\0';
-printf("Solid Name is %s\n",solidname);
 
 outname = malloc(9+solid_matches[1].rm_eo - solid_matches[1].rm_so+filenamesize+1);
-printf("Out Name is %s\n",solidname);
 
 strncpy(outname,filename,filenamesize-4);
 outname[filenamesize-4] = '-';
