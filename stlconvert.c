@@ -4,7 +4,6 @@
 #include <string.h>
 #include <regex.h>
 #include <stdint.h>
-#include <lzma.h>
 
 float ScientificToFloat(char *in_String) {
 	// Loop Variables
