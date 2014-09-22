@@ -4,7 +4,6 @@
 #include <string.h>
 #include <regex.h>
 #include <stdint.h>
-#include <lzma.h>
 
 float ScientificToFloat(char *in_String) {
 	// Loop Variables
@@ -91,8 +90,8 @@ char *solidname;			// The name in the ASCII STL file of the "solid"
 char line[100];				// Holds each subsequent line of the input file
 char gotstring[12];			// Holds the extracted substring identified using regexp
 char header[80];			// An 80 byte string that is written to the start of an STL file acording to the protocol.
-FILE *inputfile, *outputfile;
-float coordinate;
+FILE *inputfile, *outputfile;		// Input and output file handles
+float coordinate;			// The X or Y or Z coordinate or vector that is extracted from the regex
 regex_t solid_test, normal_test, vertex_test, endsolid_test;
 regmatch_t line_matches[4], solid_matches[2];
 
@@ -102,7 +101,7 @@ regcomp( &normal_test, "facet normal\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]
 regcomp( &vertex_test, "vertex\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]\\{2\\}\\)\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]\\{2\\}\\)\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]\\{2\\}\\)", 0 );
 regcomp( &vertex_test, "vertex\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]\\{2\\}\\)\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]\\{2\\}\\)\\s*\\(\\-\\?[0-9].[0-9]\\+e[\\+\\|\\-][0-9]\\{2\\}\\)", 0 );
 
-if ( argv[1] == NULL)
+if ( argv[1] == NULL)			// Make sure that an argument is supplied to the program
 {
 	printf("No input file supplied\n");
 	return(-3);
